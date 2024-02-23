@@ -20,12 +20,9 @@ class Solution:
 
         times.sort()
 
-        ans = times[0]
-        for i in range(1, n_people):
-            ans += times[i]
-
-            for j in range(i - 1, -1, -1):
-                ans += times[j]
+        ans = 0
+        for i in range(0, n_people):
+            ans += times[i] * (n_people - i)
 
         print(ans)
 
