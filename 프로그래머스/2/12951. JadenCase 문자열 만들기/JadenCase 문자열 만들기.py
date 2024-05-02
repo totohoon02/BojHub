@@ -1,12 +1,15 @@
 def solution(s):
-    arr = [s[0].upper()]
-    prev = s[0]
+    answer = s[0].upper() if s[0].isalpha() else s[0]
+    
+    prev = ""
     for i in range(1, len(s)):
-        if s[i].isalpha() and prev == " ":
-            arr.append(s[i].upper())
-        elif s[i].isalpha():
-            arr.append(s[i].lower())
+        cur = s[i]
+        
+        if prev == " " and cur.isalpha():
+            answer += cur.upper()
         else:
-            arr.append(s[i])
-        prev = s[i]
-    return "".join(arr)
+            answer += cur.lower()
+        
+        prev = cur
+    
+    return answer
