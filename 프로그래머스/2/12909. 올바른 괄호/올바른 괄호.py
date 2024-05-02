@@ -1,15 +1,17 @@
 def solution(s):
-    brackets = list(s)
     stack = []
     
-    for bracket in brackets:
-        if bracket == '(':
-            stack.append(bracket)
+    for bck in s:
+        if bck == "(":
+            stack.append(bck)
         else:
             if not stack:
                 return False
+            
             poped = stack.pop()
-    
+            if bck != ")":
+                return False
     if stack:
         return False
+
     return True
