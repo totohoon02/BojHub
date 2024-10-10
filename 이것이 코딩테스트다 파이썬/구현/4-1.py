@@ -1,36 +1,39 @@
-import sys
-from typing import *
+from utils import *
 
-input = sys.stdin.readline
+# NxN의 맵, (1,1)에서 시작
+# L R U D 벽일 경우 무시
+# 최종 위치 출력 프로그램
 
-
-def input_as_str_list(sep=" ") -> List[str]:
-    return input().rstrip().split(sep)
-
-
-def input_as_num_list(sep=" ") -> List[int]:
-    return list(map(int, input_as_str_list(sep)))
-
-
-def join(str_list: List[str], sep="") -> str:
-    return sep.join(str_list)
-
-
-map_size = int(input())
+start = [1, 1]
+n = int(input())
 moves = input_as_str_list()
-cur = [1, 1]
+
+
+def is_out_bouded(m: list):
+    if n < start[0] + m[0] or n < start[1] + m[1]:
+        return True
+
+    if 1 > start[0] + m[0] or 1 > start[1] + m[1]:
+        return True
+    return False
+
 
 for move in moves:
+    if move == "L":
+        if not is_out_bouded([-1, 0]):
+            start[0] += -1
+
+    if move == "R":
+        if not is_out_bouded([1, 0]):
+            start[0] += 1
+
     if move == "U":
-        if cur[0] - 1 > 0:
-            cur[0] -= 1
-    elif move == "D":
-        if cur[0] + 1 < map_size:
-            cur[0] += 1
-    elif move == "L":
-        if cur[1] - 1 > 0:
-            cur[1] -= 1
-    elif move == "R":
-        if cur[1] + 1 < map_size:
-            cur[1] += 1
-print(cur)
+        if not is_out_bouded([0, -1]):
+            start[1] += -1
+
+    if move == "D":
+        if not is_out_bouded([0, 1]):
+            start[1] += 1
+
+# 좌표계 확인..
+print(start[::-1])

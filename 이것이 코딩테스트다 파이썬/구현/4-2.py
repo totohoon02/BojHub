@@ -1,27 +1,28 @@
-import sys
-from typing import *
-
-input = sys.stdin.readline
-
-
-def input_as_str_list(sep=" ") -> List[str]:
-    return input().rstrip().split(sep)
-
-
-def input_as_num_list(sep=" ") -> List[int]:
-    return list(map(int, input_as_str_list(sep)))
-
-
-def join(str_list: List[str], sep="") -> str:
-    return sep.join(str_list)
-
+# 00:00:00부터 n시 59분 59초까지 3이 하나라도 포함 카운트
 
 n = int(input())
+h, m, s = 0, 0, 0
 count = 0
-for i in range(n + 1):
-    for j in range(0, 60):
-        for k in range(0, 60):
-            time = join([str(i), str(j), str(k)])
-            if "3" in time:
-                count += 1
+
+while h != n or m != 59 or s != 59:
+    s += 1
+    if s == 60:
+        m += 1
+        s = 0
+
+    if m == 60:
+        h += 1
+        m = 0
+
+    if '3' in str(s):
+        count += 1
+        continue
+
+    if '3' in str(m):
+        count += 1
+        continue
+
+    if '3' in str(h):
+        count += 1
+
 print(count)

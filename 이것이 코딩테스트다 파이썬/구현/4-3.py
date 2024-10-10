@@ -1,28 +1,26 @@
-import sys
-from typing import *
+from utils import *
 
-input = sys.stdin.readline
+# 8x8
+# move 수평2수직1 수직2수평1
+# 위치가 주어졌을 때 이동할 수 있는 좌표 수
 
-
-def input_as_str_list(sep=" ") -> List[str]:
-    return input().rstrip().split(sep)
-
-
-def input_as_num_list(sep=" ") -> List[int]:
-    return list(map(int, input_as_str_list(sep)))
-
-
-def join(str_list: List[str], sep="") -> str:
-    return sep.join(str_list)
-
-
-pos = input() # a1
-pos_num = [8 - ord('h') + ord(pos[0]), int(pos[1])]
-moves = [[2, 1], [2, -1], [-2, 1], [-2, -1], [1, 2], [1, -2], [-1, 2], [-1, -2], ]
+p = input()  # a1
+x, y = [ord(p[0]) - ord('a'), int(p[1]) - 1]
 count = 0
 
+# l r u d
+moves = [[-2, 1], [-2, -1], [2, 1], [2, -1]]
+
+# horizontal_first
 for move in moves:
-    temp = [pos_num[0] + move[0], pos_num[1] + move[1]]
-    if 0 < temp[0] < 9 and 0 < temp[1] < 9:
-        count += 1
+    if 0 < x + move[0] and x + move[0] < 8:
+        if 0 < y + move[1] and y + move[1] < 8:
+            count += 1
+
+# vertiacl_first
+for move in moves:
+    if 0 < y + move[0] and y + move[0] < 8:
+        if 0 < x + move[1] and x + move[1] < 8:
+            count += 1
+
 print(count)

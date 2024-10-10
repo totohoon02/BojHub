@@ -41,7 +41,8 @@ visited[x][y] = 1
 while True:
     # Turn
     dir -= 1
-    if dir < 0: dir = 3
+    if dir < 0:
+        dir = 3
 
     nx = x + dx[dir]
     ny = y + dy[dir]
