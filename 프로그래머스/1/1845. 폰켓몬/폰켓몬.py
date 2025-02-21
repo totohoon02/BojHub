@@ -1,9 +1,15 @@
 def solution(nums):
-    max_kind = len(nums) // 2
-    kind = set()
+    max_choice = len(nums) // 2
+    n_choice = 0
+    choice = set()
+    
     
     for num in nums:
-        kind.add(num)
-        if(len(kind) == max_kind):
-            break
-    return len(kind)
+        if num not in choice:
+            choice.add(num)
+            n_choice += 1
+            
+            if n_choice == max_choice:
+                break
+    
+    return n_choice
