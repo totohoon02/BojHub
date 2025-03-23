@@ -1,18 +1,33 @@
 import sys
-from itertools import permutations
 
 input = sys.stdin.readline
 
-n = int(input())
-nums = list(map(int, input().split(" ")))
-pmts = permutations(nums, len(nums))
 
-max_sum = 0
-for pmt in pmts:
-    cur_sum = 0
-    for i in range(len(pmt) - 1):
-        cur_sum += abs(pmt[i] - pmt[i+1])
-        if cur_sum > max_sum:
-            max_sum = cur_sum
+def iinput():
+    return int(input().strip())
 
-print(max_sum)
+
+def spt(sep=" "):
+    return input().strip().split(sep)
+
+
+def spt_map_int(sep=" "):
+    return list(map(int, input().strip().split(sep)))
+
+
+def sol():
+    from itertools import permutations    
+    _ = iinput()
+    nums = spt_map_int()
+
+    pers = permutations(nums, len(nums))
+
+    max_num = 0
+    for per in pers:
+        cur = sum([abs(per[i] - per[i+1]) for i in range(0, len(per) - 1)])
+        if cur > max_num:
+            max_num = cur
+    
+    print(max_num)
+    
+sol()
