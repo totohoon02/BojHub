@@ -1,36 +1,32 @@
 import sys
-from typing import *
 
 input = sys.stdin.readline
 
 
-def join(str_list: List[str], sep="") -> str:
-    return sep.join(str_list)
+def iinput():
+    return int(input().strip())
 
 
-def readline_as_str_list(sep=" ") -> List[str]:
-    return input().split(sep)
+def spt(sep=" "):
+    return input().strip().split(sep)
 
 
-def map_as_int_list(str_list: List[str]) -> List[int]:
-    return list(map(int, str_list))
+def spt_map_int(sep=" "):
+    return list(map(int, input().strip().split(sep)))
 
 
-class Solution:
-    @staticmethod
-    def solve():
-        from collections import deque
-        # n : 총 인원수, k 건너 뛸 인덱스 수
-        n, k = map_as_int_list(readline_as_str_list())
+def sol():
+    from collections import deque
+    N, K = spt_map_int()
+    d = deque(range(1, N+1))
 
-        ans = []
-        d = deque([x + 1 for x in range(n)])
-        while d:
-            for _ in range(k - 1):
-                d.append(d.popleft())
-            ans.append(str(d.popleft()))
+    pmt = []
+    while len(d) > 0:
+        for _ in range(K - 1):
+            d.append(d.popleft())
+        pmt.append(d.popleft())
 
-        print(f"<{join(ans, ', ')}>")
+    print(f"<{', '.join(list(map(str, pmt)))}>")    
 
 
-Solution.solve()
+sol()
