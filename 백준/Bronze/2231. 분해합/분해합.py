@@ -1,34 +1,33 @@
 import sys
-from typing import *
 
 input = sys.stdin.readline
 
 
-def readline_as_str_list(sep=" ") -> List[str]:
-    return input().split(sep)
+def iinput():
+    return int(input().strip())
 
 
-def map_as_int_list(str_list: List[str]) -> List[int]:
-    return list(map(int, str_list))
+def spt(sep=" "):
+    return input().strip().split(sep)
 
 
-class Solution:
-    @staticmethod
-    def solve():
-        n = int(input())
-        scale = len(str(n))
+def spt_map_int(sep=" "):
+    return list(map(int, input().strip().split(sep)))
 
-        start_num = 0
-        while True:
-            str_num = str(start_num)
-            gen = start_num + sum([int(x) for x in str_num])
-            if n == gen:
-                print(start_num)
-                return
-            start_num += 1
 
-            if start_num > n:
-                print(0)
-                return
+def sol():
+    n = iinput() # 216
+    m = n
+    min_gen = 0
+    
+    while m > 0:
+        temp = m + sum(list(map(int, list(str(m)))))
 
-Solution.solve()
+        if temp == n:
+            min_gen = m
+            
+        m -= 1
+
+    print(min_gen)
+
+sol()
